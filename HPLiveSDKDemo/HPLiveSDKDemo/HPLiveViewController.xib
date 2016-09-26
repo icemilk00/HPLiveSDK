@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HPLiveViewController">
+            <connections>
+                <outlet property="showBgView" destination="mmi-is-AcQ" id="Tm5-Al-nuH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmi-is-AcQ">
+                    <color key="backgroundColor" red="0.24460320723684212" green="0.24460320723684212" blue="0.29502467105263158" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vq1-y6-L7z">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="TJX-yi-GSd"/>
+                        <constraint firstAttribute="width" constant="44" id="nHO-R6-AFY"/>
+                    </constraints>
+                    <state key="normal" title="退出">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelLiveAction:" destination="-1" eventType="touchUpInside" id="TaV-Ra-zWA"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mmi-is-AcQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="G5Q-gU-2DT"/>
+                <constraint firstAttribute="trailing" secondItem="mmi-is-AcQ" secondAttribute="trailing" id="XJ4-zH-pNG"/>
+                <constraint firstAttribute="bottom" secondItem="Vq1-y6-L7z" secondAttribute="bottom" constant="8" id="eoX-Sc-KDA"/>
+                <constraint firstAttribute="bottom" secondItem="mmi-is-AcQ" secondAttribute="bottom" id="s9Q-Hm-ol6"/>
+                <constraint firstAttribute="trailing" secondItem="Vq1-y6-L7z" secondAttribute="trailing" constant="8" id="vNF-dr-9Oq"/>
+                <constraint firstItem="mmi-is-AcQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zj7-xc-K3k"/>
+            </constraints>
+            <point key="canvasLocation" x="-204" y="47"/>
+        </view>
+    </objects>
+</document>
