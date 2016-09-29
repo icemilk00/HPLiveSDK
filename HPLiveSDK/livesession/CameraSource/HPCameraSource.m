@@ -7,11 +7,15 @@
 //
 
 #import "HPCameraSource.h"
+#import "LFGPUImageBeautyFilter.h"
 
 @interface HPCameraSource() <GPUImageVideoCameraDelegate>
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
+@property (nonatomic, strong) GPUImageView *cameraView;
 
+@property (nonatomic, strong) GPUImageCropFilter *cropFilter;
+@property (nonatomic, strong) LFGPUImageBeautyFilter *beautifulFilter;
 
 @end
 
@@ -31,41 +35,57 @@
 -(void)configVideoCamera
 {
     _videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionFront];
-    _videoCamera.delegate = self;
     _videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     _videoCamera.horizontallyMirrorFrontFacingCamera = NO;
     _videoCamera.horizontallyMirrorRearFacingCamera = NO;
     _videoCamera.frameRate = 25;
     
-    GPUImageHighlightShadowFilter *customFilter = [[GPUImageHighlightShadowFilter alloc] init];
+    self.beautifulFilter = [[LFGPUImageBeautyFilter alloc] init];
+    
+    __weak HPCameraSource *_w_self = self;
+    [_beautifulFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+        GPUImageFramebuffer *imageFramebuffer = output.framebufferForOutput;
+        CVPixelBufferRef pixelBuffer = [imageFramebuffer pixelBuffer];
+        if (_w_self.delegate && [_w_self.delegate respondsToSelector:@selector(videoEncodeWithImageBuffer:)]) {
+            [_w_self.delegate videoEncodeWithImageBuffer:pixelBuffer];
+        }
+    }];
+    
     _cameraView = [[GPUImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [_cameraView setFillMode:kGPUImageFillModePreserveAspectRatioAndFill];
     [_cameraView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [_cameraView setInputRotation:kGPUImageFlipHorizonal atIndex:0];
     
-    [_videoCamera addTarget:customFilter];
-    [customFilter addTarget:_cameraView];
+    [_videoCamera addTarget:_beautifulFilter];
+    [_beautifulFilter addTarget:_cameraView];
     
     if(_videoCamera.cameraPosition == AVCaptureDevicePositionFront) [_cameraView setInputRotation:kGPUImageFlipHorizonal atIndex:0];
     else [_cameraView setInputRotation:kGPUImageNoRotation atIndex:0];
     
-    [_videoCamera addAudioInputsAndOutputs];
-    
-    [_videoCamera startCameraCapture];
-    
-    _cameraShowView = _cameraView;
-    
 }
 
-- (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer andType:(GPUImageMediaType)mediaType
+
+- (void)startVideoCamera
 {
-    if (mediaType == MediaTypeAudio) {
-//        [_session audioEncodeWithSampBuffer:sampleBuffer];
-    }
-    else if (mediaType == MediaTypeVideo)
+#if !TARGET_IPHONE_SIMULATOR
+    [_videoCamera startCameraCapture];
+#endif
+}
+
+- (void)stopVideoCamera
+{
+#if !TARGET_IPHONE_SIMULATOR
+    [_videoCamera stopCameraCapture];
+#endif
+}
+
+-(void)setupOnView:(UIView *)showView
+{
+    if(self.cameraView.superview)
     {
-        CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
-        [self.delegate videoEncodeWithImageBuffer:imageBuffer timeStamp:0];
+        [self.cameraView removeFromSuperview];
     }
+    self.cameraView.frame = showView.bounds;
+    [showView addSubview:self.cameraView];
 }
 @end

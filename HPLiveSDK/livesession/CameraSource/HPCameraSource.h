@@ -12,14 +12,16 @@
 
 @protocol HPCameraSourceDelegate <NSObject>
 
--(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer timeStamp:(uint64_t)time;
+-(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer;
 
 @end
 
 @interface HPCameraSource : NSObject
 
-@property (nonatomic, strong) UIView *cameraShowView;
-@property (nonatomic, strong) GPUImageView *cameraView;
 @property (nonatomic, assign) id <HPCameraSourceDelegate> delegate;
 
+- (void)startVideoCamera;
+- (void)stopVideoCamera;
+
+-(void)setupOnView:(UIView *)showView;
 @end

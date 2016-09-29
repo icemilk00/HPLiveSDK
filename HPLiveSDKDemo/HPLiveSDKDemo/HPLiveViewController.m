@@ -32,12 +32,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.liveSession = [[HPLiveSession alloc] initWithLiveSteamUrl:_liveSteamUrlStr];
-    [_liveSession setupCameraOnView:_showBgView];
+    _liveSession.showLiveView = _showBgView;
+    [_liveSession start];
+    
+    [_liveSession pushStream];
 }
 
 #pragma mark - cancel Live
 - (IBAction)cancelLiveAction:(id)sender {
     
+    if (_liveSession) {
+        [_liveSession stop];
+    }
     [self.navigationController popViewControllerAnimated:YES];
     
 }

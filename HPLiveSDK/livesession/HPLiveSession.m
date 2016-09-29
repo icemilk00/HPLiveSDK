@@ -13,10 +13,9 @@
 //#import "NSDictionary+Model.h"
 //#import <YYModel.h>
 
-
 #define NOW_TIME (CACurrentMediaTime() * 1000)  //获取当前时间
 
-@interface HPLiveSession() <VVVideoEncoderDelegate, VVAudioEncoderDelegate, RtpSocketDelegate, HPCameraSourceDelegate>
+@interface HPLiveSession() <VVVideoEncoderDelegate, VVAudioEncoderDelegate, HPCameraSourceDelegate>
 {
     NSString *_rtmpUrlStr;
     
@@ -25,8 +24,6 @@
     
     dispatch_semaphore_t _timeStampSemaphoreForServer;
     dispatch_semaphore_t _timeStampSemaphoreForLocal;
-    
-    NSTimer *_upTimer;   //负责上报统计的timer，10秒执行一次
     
     BOOL _canPush;
     
@@ -45,29 +42,27 @@
         _rtmpUrlStr = @"";
         _canPush = NO;
         
-        //init camera
-        self.cameraSource = [[HPCameraSource alloc] init];
-        _cameraSource.delegate = self;
-        
-//        self.rtpSocket = [[VVLiveRtpSocket alloc] init];
-//        _rtpSocket.delegate = self;
-//        
-//        self.videoEncoder = [[VVVideoEncoder alloc] initWithConfig:videoConfig];
-//        _videoEncoder.delegate = self;
-//        
+        self.rtmpSocket = [[VVLiveRtmpSocket alloc] initWithRtmpUrlStr:liveSteamUrlStr];
+//        _rtmpSocket.delegate = self;
+//
+        self.videoEncoder = [[VVVideoEncoder alloc] initWithConfig:videoConfig];
+        _videoEncoder.delegate = self;
+//
 ////        self.audioEncoder = [[VVAudioEncoder alloc] init];
 ////        _audioEncoder.delegate = self;
 //        
 //        self.softAudioEncoder = [[VVAudioSoftEncoder alloc] initWithConfig:audioConfig];
 //        _softAudioEncoder.delegate = self;
 //        
-//        _isSendingFirstFrame = YES;
-//        _timeStampSemaphoreForServer = dispatch_semaphore_create(1);
-//        _timeStampSemaphoreForLocal = dispatch_semaphore_create(1);
-//        
-////        _upTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(rtpReportLiveStatus) userInfo:nil repeats:YES];
+        _isSendingFirstFrame = YES;
+        _timeStampSemaphoreForServer = dispatch_semaphore_create(1);
+        _timeStampSemaphoreForLocal = dispatch_semaphore_create(1);
+
 //        _logManager = [[VVLiveDebugInfoManager alloc] init];
 ////        _logManager = [[VVLiveDebugInfoManager alloc] initWithFileName:[NSString stringWithFormat:@"%lu-live_%@", (unsigned long)roomId,@"audio_log"]];
+        //init camera
+        self.cameraSource = [[HPCameraSource alloc] init];
+        _cameraSource.delegate = self;
     }
     return self;
 }
@@ -84,8 +79,8 @@
 #pragma mark - socket control
 -(void)start
 {
-//    if (_rtpSocket) [_rtpSocket start];
-//    [[GPUImageCameraSource sharedInstance] startVideoCamera];
+    if (_rtmpSocket) [_rtmpSocket start];
+    [_cameraSource startVideoCamera];
 //    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC));
 //    dispatch_after(when, dispatch_get_main_queue(), ^(void) {
 //        [[AudioController sharedInstance] startCapture];
@@ -95,15 +90,10 @@
 -(void)stop
 {
 //    [[AudioController sharedInstance] stopCapture];
-//    [[GPUImageCameraSource sharedInstance] stopVideoCamera];
-//    if (_rtpSocket) [_rtpSocket stop];
+    [_cameraSource stopVideoCamera];
+    if (_rtmpSocket) [_rtmpSocket stop];
 //    if (_softAudioEncoder) [_softAudioEncoder encoderStop];
-//    if (_upTimer)
-//    {
-//        [_upTimer invalidate], _upTimer = nil;
-//    }
 //    [_logManager close];
-//    [self uploadLogFile];
 }
 
 -(void)pushStream
@@ -114,27 +104,23 @@
 #pragma mark - audio & video encode
 -(void)audioEncodeWithBufferList:(AudioBufferList)bufferList timeStamp:(uint64_t)time
 {
-
-//    time = [self sessionTimeStampForServer];
-//    [_softAudioEncoder encodeBufferList:bufferList timeStamp:time];
+    [_softAudioEncoder encodeBufferList:bufferList timeStamp:[self sessionTimeStampForLocal]];
 }
 
--(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer timeStamp:(uint64_t)time
+-(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer
 {
-//    time = [self sessionTimeStampForServer];
-//    [_videoEncoder encodeImageBuffer:imageBuffer timeStamp:time];
-
+    if(_videoEncoder) [_videoEncoder encodeImageBuffer:imageBuffer timeStamp:[self sessionTimeStampForLocal]];
 }
 
 #pragma mark - audio & video complete delegate
 -(void)audioEncodeComplete:(VVAudioEncodeFrame *)encodeFrame
 {
-    if (_rtpSocket && _canPush) [_rtpSocket sendFrame:encodeFrame];
+    if (_rtmpSocket && _canPush) [_rtmpSocket sendFrame:encodeFrame];
 }
 
 -(void)videoEncodeComplete:(VVVideoEncodeFrame *)encodeFrame
 {
-    if (_rtpSocket && _canPush) [_rtpSocket sendFrame:encodeFrame];
+    if (_rtmpSocket && _canPush) [_rtmpSocket sendFrame:encodeFrame];
 }
 
 #pragma mark - audio & video config info
@@ -158,10 +144,15 @@
 }
 
 #pragma mark - videoCamera
--(void)setupCameraOnView:(UIView *)view
+
+-(void)setShowLiveView:(UIView *)showLiveView
 {
-    _cameraSource.cameraView.frame = view.bounds;
-    [view addSubview:_cameraSource.cameraView];
+    _showLiveView = showLiveView;
+    
+    if (_cameraSource) {
+        [_cameraSource setupOnView:_showLiveView];
+    }
+
 }
 
 #pragma mark - 统计上报

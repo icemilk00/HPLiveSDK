@@ -9,45 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HPLiveSDKDemo/HPLiveViewController.m"
-            timestampString = "496577304.119058"
+            filePath = "../HPLiveSDK/livesession/VideoEncoder/VVVideoEncoder.m"
+            timestampString = "496721877.346735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../HPLiveSDK/livesession/CameraSource/HPCameraSource.m"
-            timestampString = "496577417.773215"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-configVideoCamera"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../HPLiveSDK/livesession/CameraSource/HPCameraSource.m"
-            timestampString = "496577486.953278"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "-configVideoCamera"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "-createCompressionSession"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

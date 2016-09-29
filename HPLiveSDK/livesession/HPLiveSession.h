@@ -19,7 +19,7 @@
 @interface HPLiveSession : NSObject
 
 //推流
-@property (nonatomic, strong) VVLiveRtpSocket *rtpSocket;
+@property (nonatomic, strong) VVLiveRtmpSocket *rtmpSocket;
 
 //视频编码器
 @property (nonatomic, strong) VVVideoEncoder *videoEncoder;
@@ -33,6 +33,7 @@
 
 //音频采集
 
+@property (nonatomic, strong) UIView *showLiveView;             //显示直播View
 @property (nonatomic, assign) id <LiveSessionDelegate> delegate;
 
 
@@ -46,13 +47,12 @@
 
 -(void)audioEncodeWithBufferList:(AudioBufferList)bufferList timeStamp:(uint64_t)time;
 
--(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer timeStamp:(uint64_t)time;
+-(void)videoEncodeWithImageBuffer:(CVImageBufferRef)imageBuffer;
 
 -(VVLiveVideoConfiguration *)videoConfigure;
 -(VVLiveAudioConfiguration *)audioConfigure;
 
 -(void)audioLog:(NSString *)logStr;
 
--(void)setupCameraOnView:(UIView *)view;
 
 @end

@@ -33,7 +33,7 @@
     
     VTCompressionSessionRef _videoCompressionSession;
     
-    NSInteger frameCount;
+    int frameCount;
     
     NSData *sps;
     NSData *pps;
@@ -82,7 +82,7 @@
         _currentMaxBitRate = _currentVideoEncodeConfig.videoMaxBitRate;
         _currentFrameRate = _currentVideoEncodeConfig.videoEncodeFrameRate;
         
-        _encodeQueue = dispatch_queue_create("videoEncodeQueue", nil);
+        _encodeQueue = dispatch_queue_create("videoEncodeQueue", DISPATCH_QUEUE_SERIAL);
         _maxDelaySemaphore = dispatch_semaphore_create(1);
         _encodeDelayArray = [[NSMutableArray alloc] init];
         _frameSemaphore = dispatch_semaphore_create(1);
@@ -163,7 +163,6 @@
 {
     dispatch_async(_encodeQueue, ^{
         @autoreleasepool {
-            
             if(_isBackGround) return;
             
             BOOL isEncode = [_dropFrameHelper isEncodeFrame];
@@ -177,7 +176,7 @@
             
             frameCount++;
             
-            CMTime presentationTimeStamp = CMTimeMake(frameCount, _currentVideoEncodeConfig.videoFrameRate);
+            CMTime presentationTimeStamp = CMTimeMake(frameCount, (int)_currentVideoEncodeConfig.videoFrameRate);
             VTEncodeInfoFlags flags;
             
             if (timeStamp - _beginFlagTime >= 1000) {
@@ -192,7 +191,7 @@
             
             if(_debugManager) [_debugManager logFeedDataWithFrameIndex:frameCount];
             VELog(@"VTCompressionSessionEncodeFrame begin ");
-            VTCompressionSessionEncodeFrame(_videoCompressionSession, imageBuffer, presentationTimeStamp, kCMTimeInvalid, NULL, (__bridge_retained void * _Nullable)(@{@"timeStamp":@(timeStamp),@"frameCount":@(frameCount)}), &flags);
+            VTCompressionSessionEncodeFrame(_videoCompressionSession, imageBuffer, presentationTimeStamp, kCMTimeInvalid, NULL,(__bridge_retained void * _Nullable)(@{@"timeStamp":@(timeStamp),@"frameCount":@(frameCount)}), &flags);
             VELog(@"VTCompressionSessionEncodeFrame end ");
         }
         
@@ -268,15 +267,15 @@ static void compressionOutputCallback(void *outputCallbackRefCon, void *sourceFr
             
             NALUnitLength = CFSwapInt32BigToHost(NALUnitLength);
         
-            NSMutableData *NALUdata = [[NSData alloc] initWithBytes:(dataPointer + buffOffset + AVCCHeaderLength) length:NALUnitLength];
+            NSData *NALUdata = [[NSData alloc] initWithBytes:(dataPointer + buffOffset + AVCCHeaderLength) length:NALUnitLength];
             
-            if(keyFrame){
-                uint8_t header[] = {0x00,0x00,0x00,0x01};
-                [data appendBytes:header length:4];
-            }else{
-                uint8_t header[] = {0x00,0x00,0x00,0x01};
-                [data appendBytes:header length:4];
-            }
+//            if(keyFrame){
+//                uint8_t header[] = {0x00,0x00,0x00,0x01};
+//                [data appendBytes:header length:4];
+//            }else{
+//                uint8_t header[] = {0x00,0x00,0x00,0x01};
+//                [data appendBytes:header length:4];
+//            }
             
             [data appendData:NALUdata];
             
