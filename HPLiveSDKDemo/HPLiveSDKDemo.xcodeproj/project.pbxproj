@@ -193,6 +193,7 @@
 		E63EE6A61D9CE804002314EB /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = E63EE5F11D9CE804002314EB /* License.txt */; };
 		E63EE6A71D9CE804002314EB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E63EE5F21D9CE804002314EB /* README.md */; };
 		E63EE6AB1D9CF092002314EB /* LFGPUImageBeautyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E63EE6AA1D9CF092002314EB /* LFGPUImageBeautyFilter.m */; };
+		E63EE6B11D9D0330002314EB /* UIDevice+Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = E63EE6B01D9D0330002314EB /* UIDevice+Performance.m */; };
 		E65A21871D9BA24600990A09 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65A21861D9BA24600990A09 /* CoreVideo.framework */; };
 		E68F73E21D9A6B4F005D36E4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E6C526361D9A622A000024E6 /* libz.tbd */; };
 		E68F73E51D9A6C95005D36E4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F73E41D9A6C95005D36E4 /* CFNetwork.framework */; };
@@ -641,6 +642,8 @@
 		E63EE5F21D9CE804002314EB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E63EE6A91D9CF092002314EB /* LFGPUImageBeautyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGPUImageBeautyFilter.h; sourceTree = "<group>"; };
 		E63EE6AA1D9CF092002314EB /* LFGPUImageBeautyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGPUImageBeautyFilter.m; sourceTree = "<group>"; };
+		E63EE6AF1D9D0330002314EB /* UIDevice+Performance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Performance.h"; sourceTree = "<group>"; };
+		E63EE6B01D9D0330002314EB /* UIDevice+Performance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Performance.m"; sourceTree = "<group>"; };
 		E65A21861D9BA24600990A09 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		E68F73E41D9A6C95005D36E4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E68F73E71D9A6D57005D36E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1323,6 +1326,15 @@
 			path = Fliter;
 			sourceTree = "<group>";
 		};
+		E63EE6AE1D9D0330002314EB /* DeviceHelper */ = {
+			isa = PBXGroup;
+			children = (
+				E63EE6AF1D9D0330002314EB /* UIDevice+Performance.h */,
+				E63EE6B01D9D0330002314EB /* UIDevice+Performance.m */,
+			);
+			path = DeviceHelper;
+			sourceTree = "<group>";
+		};
 		E69E10971D98C6E300DF48AE = {
 			isa = PBXGroup;
 			children = (
@@ -1664,6 +1676,7 @@
 				E69E12D81D98CD3A00DF48AE /* DebugInfo */,
 				E69E12DB1D98CD3A00DF48AE /* EncodeFrame */,
 				E69E12E21D98CD3A00DF48AE /* LivePacket */,
+				E63EE6AE1D9D0330002314EB /* DeviceHelper */,
 				E69E12E51D98CD3A00DF48AE /* livesession.h */,
 			);
 			path = livesession;
@@ -2072,6 +2085,7 @@
 				E69E13BB1D98CD3A00DF48AE /* AEAudioBufferManager.m in Sources */,
 				E63EE6661D9CE804002314EB /* GPUImagePixellatePositionFilter.m in Sources */,
 				E69E13D31D98CD3A00DF48AE /* VVLiveDebugInfoManager.m in Sources */,
+				E63EE6B11D9D0330002314EB /* UIDevice+Performance.m in Sources */,
 				E63EE60E1D9CE804002314EB /* GPUImageColorDodgeBlendFilter.m in Sources */,
 				E69E13CC1D98CD3A00DF48AE /* TPCircularBuffer.c in Sources */,
 				E63EE65D1D9CE804002314EB /* GPUImageNormalBlendFilter.m in Sources */,

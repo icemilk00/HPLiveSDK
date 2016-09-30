@@ -31,11 +31,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSLog(@"self.view = %@", self.view);
     self.liveSession = [[HPLiveSession alloc] initWithLiveSteamUrl:_liveSteamUrlStr];
-    _liveSession.showLiveView = _showBgView;
+    
     [_liveSession start];
     
     [_liveSession pushStream];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_liveSession.showLiveView != _showBgView) {
+        _liveSession.showLiveView = _showBgView;
+    }
 }
 
 #pragma mark - cancel Live
@@ -46,6 +55,10 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+- (IBAction)changeCameraPosition:(id)sender {
+    
+    [_liveSession.cameraSource rotateCamera];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -20,6 +20,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmi-is-AcQ">
                     <color key="backgroundColor" red="0.24460320723684212" green="0.24460320723684212" blue="0.29502467105263158" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdx-nE-1KX">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="nQh-ue-Q4X"/>
+                        <constraint firstAttribute="height" constant="44" id="yFR-We-uI4"/>
+                    </constraints>
+                    <state key="normal" title="切">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <connections>
+                        <action selector="changeCameraPosition:" destination="-1" eventType="touchUpInside" id="5nH-9d-pJA"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vq1-y6-L7z">
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="TJX-yi-GSd"/>
@@ -35,14 +47,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="kdx-nE-1KX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="CuE-eh-4ad"/>
                 <constraint firstItem="mmi-is-AcQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="G5Q-gU-2DT"/>
                 <constraint firstAttribute="trailing" secondItem="mmi-is-AcQ" secondAttribute="trailing" id="XJ4-zH-pNG"/>
                 <constraint firstAttribute="bottom" secondItem="Vq1-y6-L7z" secondAttribute="bottom" constant="8" id="eoX-Sc-KDA"/>
+                <constraint firstAttribute="trailing" secondItem="kdx-nE-1KX" secondAttribute="trailing" constant="8" id="gAX-z4-TBa"/>
                 <constraint firstAttribute="bottom" secondItem="mmi-is-AcQ" secondAttribute="bottom" id="s9Q-Hm-ol6"/>
                 <constraint firstAttribute="trailing" secondItem="Vq1-y6-L7z" secondAttribute="trailing" constant="8" id="vNF-dr-9Oq"/>
                 <constraint firstItem="mmi-is-AcQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zj7-xc-K3k"/>
             </constraints>
-            <point key="canvasLocation" x="-448" y="24"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-730" y="-101"/>
         </view>
     </objects>
 </document>

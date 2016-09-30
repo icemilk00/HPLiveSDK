@@ -20,8 +20,13 @@
 
 @property (nonatomic, assign) id <HPCameraSourceDelegate> delegate;
 
-- (void)startVideoCamera;
-- (void)stopVideoCamera;
+-(id)initWithFrameRate:(NSUInteger)frameRate;
+
+-(void)startVideoCamera;
+-(void)stopVideoCamera;
 
 -(void)setupOnView:(UIView *)showView;
+
+- (AVCaptureDevicePosition)currentCameraPosition;
+-(void)rotateCamera;
 @end

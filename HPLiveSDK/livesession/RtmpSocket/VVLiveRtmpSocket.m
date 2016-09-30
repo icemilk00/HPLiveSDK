@@ -245,7 +245,7 @@ Failed:
     body[i++] = (frame.encodeData.length >>  8) & 0xff;
     body[i++] = (frame.encodeData.length ) & 0xff;
     memcpy(&body[i],frame.encodeData.bytes,frame.encodeData.length);
-    NSLog(@"video timeStamp = %llu", frame.timeStamp);
+    //NSLog(@"video timeStamp = %llu", frame.timeStamp);
     [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timeStamp];
     free(body);
 }

@@ -61,7 +61,7 @@
 //        _logManager = [[VVLiveDebugInfoManager alloc] init];
 ////        _logManager = [[VVLiveDebugInfoManager alloc] initWithFileName:[NSString stringWithFormat:@"%lu-live_%@", (unsigned long)roomId,@"audio_log"]];
         //init camera
-        self.cameraSource = [[HPCameraSource alloc] init];
+        self.cameraSource = [[HPCameraSource alloc] initWithFrameRate:videoConfig.videoFrameRate];
         _cameraSource.delegate = self;
     }
     return self;

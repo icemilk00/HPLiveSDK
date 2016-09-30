@@ -61,6 +61,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bX1-7G-tp1"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="liveUrlTextField" destination="SWv-yS-7CV" id="U1d-Pl-RtN"/>
                     </connections>
