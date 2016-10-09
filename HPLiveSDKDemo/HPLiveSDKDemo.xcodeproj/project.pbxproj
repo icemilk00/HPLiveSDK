@@ -279,6 +279,7 @@
 		E69E148A1D99087900DF48AE /* HPLiveSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E69E14891D99087900DF48AE /* HPLiveSession.m */; };
 		E69E148E1D99137E00DF48AE /* HPCameraSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E69E148D1D99137E00DF48AE /* HPCameraSource.m */; };
 		E6C526331D9A5D51000024E6 /* VVLiveRtmpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C526321D9A5D51000024E6 /* VVLiveRtmpSocket.m */; };
+		E6D278CF1DAA143100CE39CB /* HPAudioSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D278CE1DAA143100CE39CB /* HPAudioSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -879,6 +880,8 @@
 		E6C526431D9A6324000024E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E6C526451D9A632D000024E6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E6C526471D9A6332000024E6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		E6D278CD1DAA143100CE39CB /* HPAudioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPAudioSource.h; sourceTree = "<group>"; };
+		E6D278CE1DAA143100CE39CB /* HPAudioSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPAudioSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1668,6 +1671,7 @@
 			children = (
 				E69E14881D99087900DF48AE /* HPLiveSession.h */,
 				E69E14891D99087900DF48AE /* HPLiveSession.m */,
+				E6D278CC1DAA13DE00CE39CB /* AudioSource */,
 				E69E148B1D99135B00DF48AE /* CameraSource */,
 				E69E12EA1D98CD3A00DF48AE /* VideoEncoder */,
 				E69E12CA1D98CD3A00DF48AE /* AudioEncoder */,
@@ -1826,6 +1830,15 @@
 				E6C526361D9A622A000024E6 /* libz.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6D278CC1DAA13DE00CE39CB /* AudioSource */ = {
+			isa = PBXGroup;
+			children = (
+				E6D278CD1DAA143100CE39CB /* HPAudioSource.h */,
+				E6D278CE1DAA143100CE39CB /* HPAudioSource.m */,
+			);
+			path = AudioSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2123,6 +2136,7 @@
 				E69E13B61D98CD3A00DF48AE /* AEParametricEqFilter.m in Sources */,
 				E63EE5FC1D9CE804002314EB /* GPUImageAddBlendFilter.m in Sources */,
 				E69E13AA1D98CD3A00DF48AE /* AESequencerBeat.m in Sources */,
+				E6D278CF1DAA143100CE39CB /* HPAudioSource.m in Sources */,
 				E69E13A41D98CD3A00DF48AE /* AEExpanderFilter.m in Sources */,
 				E63EE6311D9CE804002314EB /* GPUImageGrayscaleFilter.m in Sources */,
 				E63EE6871D9CE804002314EB /* GPUImageSwirlFilter.m in Sources */,
